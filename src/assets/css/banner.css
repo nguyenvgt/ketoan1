@@ -8,7 +8,6 @@
     overflow: hidden;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 /* Banner Slides */
@@ -31,6 +30,7 @@
     opacity: 0;
     transition: opacity 1s ease;
     z-index: 1;
+    border-radius: 0;
 }
 
 .banner-slide.active {
@@ -52,14 +52,17 @@
 /* Banner Content */
 .banner-content {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-    padding: 40px 30px 30px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 40px 30px;
     color: white;
     z-index: 5;
     text-align: center;
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 /* Banner Title */
@@ -156,7 +159,7 @@
     }
     
     .banner-content {
-        padding: 30px 20px 20px;
+        padding: 30px 20px;
     }
     
     .banner-title {
