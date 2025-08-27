@@ -76,46 +76,23 @@ function isHomePage() {
 // Xác định trang hiện tại
 function getCurrentPage() {
     const path = window.location.pathname;
-    const filename = path.split('/').pop() || 'index.html';
-    
-    if (filename === 'services.html') {
-        return 'services';
-    } else if (filename === 'calculator.html') {
-        return 'calculator';
-    } else if (filename === 'about.html') {
-        return 'about';
-    } else if (filename === 'contact.html') {
-        return 'contact';
+    if (path.includes('download.html')) {
+        return 'download';
     }
-    
     return 'home';
 }
 
-// Load nội dung trang (chỉ cho các trang khác trang chủ)
+// Load nội dung trang
 async function loadPageContent(pageName, container) {
-    let contentFile = '';
-    
     switch (pageName) {
-        case 'services':
-            contentFile = 'components/services-content.html';
+        case 'download':
+            await componentLoader.loadAndRender('download-content', 'components/download-content.html', container);
             break;
-        case 'calculator':
-            contentFile = 'components/calculator-content.html';
-            break;
-        case 'about':
-            contentFile = 'components/about-content.html';
-            break;
-        case 'contact':
-            contentFile = 'components/contact-content.html';
-            break;
+        case 'home':
         default:
-            return; // Không load gì nếu là trang chủ
+            // Trang chủ không cần load content component
+            break;
     }
-    
-    await componentLoader.loadAndRender(pageName, contentFile, container);
-    
-    // Khởi tạo các tính năng đặc biệt cho từng trang
-    initializePageFeatures(pageName);
 }
 
 // Khởi tạo header
@@ -195,17 +172,11 @@ function initializeFooter() {
 // Khởi tạo các tính năng đặc biệt cho từng trang
 function initializePageFeatures(pageName) {
     switch (pageName) {
-        case 'services':
-            initializeServicesFeatures();
+        case 'home':
+            initializeHomeFeatures();
             break;
-        case 'calculator':
-            initializeCalculatorFeatures();
-            break;
-        case 'about':
-            initializeAboutFeatures();
-            break;
-        case 'contact':
-            initializeContactFeatures();
+        case 'download':
+            initializeDownloadFeatures();
             break;
     }
 }
@@ -362,6 +333,12 @@ function initializeAboutFeatures() {
 
 function initializeContactFeatures() {
     console.log('Contact page features initialized');
+}
+
+// Khởi tạo tính năng trang download
+function initializeDownloadFeatures() {
+    // Có thể thêm các tính năng đặc biệt cho trang download ở đây
+    console.log('Download page features initialized');
 }
 
 // Export cho sử dụng global
